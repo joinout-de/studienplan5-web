@@ -24,7 +24,7 @@ var bc = "bower_components/"
 
 var dest = "dest";
 var files = ["*.html", "css/*.css", "js/*.js"].concat(mainBowerFiles());
-var fonts = [ bc + "bootstrap/dist/fonts/*" ];
+var fonts = [ bc + "bootstrap/dist/fonts/*", bc + "fullcalendar/dist/locale/de.js" ];
 
 // default
 gulp.task('default', ['fonts', 'templates'], function() {

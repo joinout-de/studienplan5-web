@@ -19,7 +19,9 @@ var classes,
     // classes as a hashmap
     classesTable,
     // Whether we need to check for Clazz#full_name is set (for <select> opts)
-    checkForFull;
+    checkForFull,
+    // holds the FullCalendar element
+    calendar;
 
 function Clazz(name, course, cert, jahrgang, group){
     this.name = name;
@@ -425,6 +427,16 @@ function classSelect(){
 
         classes[0][this.value].ical_file_link($("<li>")).appendTo(target);
 
+        calendar.fullCalendar('removeEventSources');
+        calendar.fullCalendar('addEventSource', _.map(classes[2][this.value], function(o){
+            o.start = o.time;
+            if(o.special == "fullWeek"){
+                o.end = moment(o.time).add(5, "days");
+                o.allDay = true;
+            }
+            return o;
+        }));
+
         if(!unified){
             $.each(classes[1][this.value], function(index, element){
                 element.ical_file_link($("<li>")).appendTo(target);
@@ -436,5 +448,12 @@ function classSelect(){
     }
     else{
         $(".inner.cover#usage #icals").hide();
+        calendar.fullCalendar('removeEventSources');
     }
 }
+
+// FullCalendar
+
+$(document).ready(function(){
+    calendar = $(".calendar").fullCalendar({"locale": "de"});
+});
