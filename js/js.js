@@ -10,6 +10,7 @@ var classes,
     ical_dir,
     unified,
     events,
+    // fullCalendar instance
     calendar;
 
 function Clazz(name, course, cert, jahrgang, group){
