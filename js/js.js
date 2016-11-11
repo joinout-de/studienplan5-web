@@ -304,6 +304,11 @@ function hashChange(evt){
             $(".nav li.active").removeClass("active");
             $(".nav li#curr-" + target.replace("#", "")).addClass("active");
 
+            if(target == '#usage')
+                $(document).ready(function(){
+                    calendar = $('.calendar').fullCalendar({locale: 'de'});
+                });
+
             if(selection_match){
                 var select = $(".inner.cover#usage select");
                 if(select && select[0] && !select[0].disabled){
@@ -371,9 +376,3 @@ function classSelect(){
         console.log("select.value -1");
     }
 }
-
-// FullCalendar
-
-$(document).ready(function(){
-    calendar = $(".calendar").fullCalendar({"locale": "de"});
-});
