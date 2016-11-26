@@ -43,7 +43,7 @@ gulp.task('reload', ["default"], function() {
     reload();
 });
 
-gulp.task('publish', ['default'], function(){
+gulp.task('produce', ['default'], function(){
     return gulp.src(files.concat(fonts), {base: '.'})
     .pipe(wiredep())
     .pipe(gulp.dest(dest))
@@ -51,5 +51,16 @@ gulp.task('publish', ['default'], function(){
         host: 'joinout.de',
         user: 'joinou',
         remotePath: '/public_html/joinoutDE/studienplan5-new'
+    }))
+});
+
+gulp.task('stage', ['default'], function(){
+    return gulp.src(files.concat(fonts), {base: '.'})
+    .pipe(wiredep())
+    .pipe(gulp.dest(dest))
+    .pipe(sftp({
+        host: 'joinout.de',
+        user: 'joinou',
+        remotePath: '/public_html/joinoutDE/studienplan5-new/stg'
     }))
 });
