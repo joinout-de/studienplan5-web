@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var sftp = require('gulp-sftp');
 var wiredep = require('wiredep').stream;
 var mainBowerFiles = require('main-bower-files');
 var browserSync = require('browser-sync');
@@ -40,4 +41,26 @@ gulp.task('serve', ["default"], function() {
 
 gulp.task('reload', ["default"], function() {
     reload();
+});
+
+gulp.task('produce', ['default'], function(){
+    return gulp.src(files.concat(fonts), {base: '.'})
+    .pipe(wiredep())
+    .pipe(gulp.dest(dest))
+    .pipe(sftp({
+        host: 'joinout.de',
+        user: 'joinou',
+        remotePath: '/public_html/joinoutDE/studienplan5-new'
+    }))
+});
+
+gulp.task('stage', ['default'], function(){
+    return gulp.src(files.concat(fonts), {base: '.'})
+    .pipe(wiredep())
+    .pipe(gulp.dest(dest))
+    .pipe(sftp({
+        host: 'joinout.de',
+        user: 'joinou',
+        remotePath: '/public_html/joinoutDE/studienplan5-new/stg'
+    }))
 });

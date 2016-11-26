@@ -21,10 +21,11 @@
     "underscore": "^1.8.3",
     "bootstrap3-ie10-viewport-bug-workaround": "https://github.com/Haixing-Hu/bootstrap3-ie10-viewport-bug-workaround.git#d6fb76b",
     "bootstrap": "^3.3.7",
-    "jshashtable": "criztovyl/jshashtable#1b8661e"
+    "jshashtable": "timdown/jshashtable"
   },
   "resolutions": {
-    "bootstrap3-ie10-viewport-bug-workaround": "d6fb76b"
+    "bootstrap3-ie10-viewport-bug-workaround": "d6fb76b",
+    "jshashtable": "80d7395900"
   },
   "overrides": {
     "bootstrap": {
