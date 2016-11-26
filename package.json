@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "description": "Web frontend for studienplan5",
   "main": "index.html",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "browser-sync": "^2.14.3",
     "gulp": "^3.9.1",
+    "gulp-sftp": "^0.1.5",
     "main-bower-files": "^2.13.1",
     "wiredep": "^4.0.0"
   },
