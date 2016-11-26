@@ -17,7 +17,7 @@ var classes,
     // events list from data.json
     events,
     // classes as a hashmap
-    classesTable;
+    classesTable,
     // Whether we need to check for Clazz#full_name is set (for <select> opts)
     checkForFull;
 
