@@ -342,6 +342,12 @@ $(document).ready(function(){
     $(".inner.cover#home").show();
     $(".nav li#curr-home").addClass("active");
 
+    calendar = $('.calendar');
+    calendar.html('');
+    calendar.fullCalendar({
+        locale: 'de'
+    });
+
     loadClasses();
 
     $(window).on("hashchange", hashChange);
@@ -384,7 +390,7 @@ function hashChange(evt){
 
             if(target == '#usage')
                 $(document).ready(function(){
-                    calendar = $('.calendar').fullCalendar({locale: 'de'});
+                    calendar.fullCalendar('render');
                 });
 
             if(selection_match){
