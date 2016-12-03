@@ -184,6 +184,7 @@ Clazz.prototype = {
 function loadClasses(default_ical_dir){
     $.ajax("classes.json").done(function(data){
         console.log("Loaded classes");
+        console.log(sprintf("JSON file version: %s", data.json_data_version));
 
         var keyys, values, loadEvents = true;
 
