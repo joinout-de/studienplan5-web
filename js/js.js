@@ -130,14 +130,11 @@ Clazz.prototype = {
 
         links = $("<span>");
 
-        container = $("<p>").html(this.simple(false) + ": <br/>").appendTo(links);
+        container = $("<p>").html(this.simple(false) + ": ").appendTo(links);
 
-        $("<label>").html("URL: ").appendTo(container);
-        $("<input>").attr({"type": "text", "value": window.location.origin + window.location.pathname + ical_link, "disabled": "true"}).appendTo(container);
-        $(container).append("<br>");
-        $("<a>").attr({"href": ical_link, "target": "_blank"}).html(".ics herunterladen").appendTo(container);
-        $(container).append("<br>");
-        $("<a>").attr({"href": sprintf("%s/%s/%s", webcal_url, ical_dir, this.ical_file_name()), "target": "_blank"}).html("webcal öffnen (Outlook)").appendTo(container);
+        $("<a>").attr({"href": ical_link, "target": "_blank"}).html("Kalender als Datei herunterladen").appendTo(container);
+        $(container).append(" | ");
+        $("<a>").attr({"href": sprintf("%s/%s/%s", webcal_url, ical_dir, this.ical_file_name()), "target": "_blank"}).html("Kalender in Outlook öffnen").appendTo(container);
 
         $(container).appendTo(links);
 
@@ -423,14 +420,14 @@ function removeHashSelection(){
 }
 function classSelect(){
 
-    var target = $($(".inner.cover#usage #icals ul#cal-links"))
+    var target = $("#cal-links");
     target.html("");
 
     console.log("select.value %s", this.value);
 
     if(String(this.value) && this.value != -1){
 
-        classes[0][this.value].ical_file_link($("<li>")).appendTo(target);
+        classes[0][this.value].ical_file_link(target);
 
         calendar.fullCalendar('removeEventSources');
         calendar.fullCalendar('addEventSource', _.map(classes[2][this.value], function(o){
@@ -448,11 +445,11 @@ function classSelect(){
             });
         }
 
-        $(".inner.cover#usage #icals").show();
+        $("#cal-links").show();
         setHashSelection(this.selectedIndex);
     }
     else{
-        $(".inner.cover#usage #icals").hide();
+        $("#cal-links").hide();
         calendar.fullCalendar('removeEventSources');
     }
 }
