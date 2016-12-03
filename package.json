@@ -5,6 +5,7 @@
   "main": "index.html",
   "dependencies": {},
   "devDependencies": {
+    "bower": "^1.8.0",
     "browser-sync": "^2.14.3",
     "gulp": "^3.9.1",
     "gulp-sftp": "^0.1.5",
