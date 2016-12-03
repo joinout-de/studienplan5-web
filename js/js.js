@@ -342,6 +342,8 @@ $(document).ready(function(){
     $(".inner.cover#home").show();
     $(".nav li#curr-home").addClass("active");
 
+    loadClasses();
+
     $(window).on("hashchange", hashChange);
 
     hashChange();
