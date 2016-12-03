@@ -256,11 +256,13 @@ function loadClasses(default_ical_dir){
                             o_parents = [],
                             o_events = [],
                             // out-of-loop var to not re-allocate it each loop
-                            clazz;
+                            clazz,
+                            // the index of the class derived from element in classes[0]
+                            clazz_index;
 
-                        classes[0].push(o_key);
+                        clazz_index = classes[0].push(o_key) - 1;
                         if(!checkForFull || o_key.full_name())
-                            $("<option>").html(o_key.full_name()).attr("value", classes[0].length-1).appendTo(select);
+                            $("<option>").html(o_key.full_name()).attr("value", clazz_index).appendTo(select);
 
                         // Outer "index" is a numeric key, no index. "values" is an Object no Array.
                         $.each(values[index], function(index, element){
@@ -275,8 +277,8 @@ function loadClasses(default_ical_dir){
                             return Clazz.from_json(o.class).equals(o_key);
                         })
 
-                        classes[1].push(o_parents);
-                        classes[2].push(o_events);
+                        classes[1][clazz_index] = o_parents;
+                        classes[2][clazz_index] = o_events;
 
                         if(!classesTable.containsKey(o_key))
                             classesTable.put(o_key, { parents: o_parents, events: o_events });
