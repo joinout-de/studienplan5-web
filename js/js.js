@@ -260,7 +260,7 @@ function loadClasses(default_ical_dir){
 
                         classes[0].push(o_key);
                         if(!checkForFull || o_key.full_name())
-                            $("<option>").html(o_key.full_name()).attr("value", index).appendTo(select);
+                            $("<option>").html(o_key.full_name()).attr("value", classes[0].length-1).appendTo(select);
 
                         // Outer "index" is a numeric key, no index. "values" is an Object no Array.
                         $.each(values[index], function(index, element){
@@ -408,6 +408,8 @@ function classSelect(){
     var target = $($(".inner.cover#usage #icals ul#cal-links"))
     target.html("");
 
+    console.log("select.value %s", this.value);
+
     if(String(this.value) && this.value != -1){
 
         classes[0][this.value].ical_file_link($("<li>")).appendTo(target);
@@ -423,6 +425,5 @@ function classSelect(){
     }
     else{
         $(".inner.cover#usage #icals").hide();
-        console.log("select.value -1");
     }
 }
