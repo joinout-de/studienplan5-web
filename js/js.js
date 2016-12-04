@@ -172,7 +172,7 @@ Clazz.prototype = {
         return ret;
     },
     hashCode: function(){
-       return Clazz.hashCode(this);
+        return Clazz.hashCode(this);
     },
     matchSelfOrParent: function(clazz){
         if(this.equals(clazz))
@@ -209,7 +209,7 @@ function loadClasses(default_ical_dir){
 
             switch(Number(json_data_version[1])){
                 case 4:
-                   checkForFull = true;
+                    checkForFull = true;
                 case 3:
                     loadEvents = data.load_events;
                 case 2:
