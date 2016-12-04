@@ -21,7 +21,9 @@ var classes,
     // Whether we need to check for Clazz#full_name is set (for <select> opts)
     checkForFull,
     // holds the FullCalendar element
-    calendar;
+    calendar,
+    // prevent endless loops when we change the location hash ourselves
+    noHashChange = 0;
 
 function Clazz(name, course, cert, jahrgang, group){
     this.name = name;
@@ -382,10 +384,10 @@ $(document).ready(function(){
 
 });
 
-var noHashChange = 0;
 function hashChange(evt){
 
-    if(noHashChange == 0){
+    if(noHashChange-- == 0){
+        noHashChange = 0;
 
         console.log("Hash change!");
 
@@ -420,8 +422,7 @@ function hashChange(evt){
         }
     }
     else {
-        console.log("noHashChange +" + (noHashChange-1));
-        noHashChange--;
+        console.log("noHashChange: " + noHashChange);
     }
 }
 
@@ -433,13 +434,17 @@ function getHashSelection(){
 }
 
 function setHashSelection(selectedIndex){
-    noHashChange = 2;
     removeHashSelection();
+    noHashChange++;
     location.hash = location.hash + "-selection-" + selectedIndex;
 }
 
 function removeHashSelection(){
-    location.hash = location.hash.replace(hashSelectionRE, "");
+    var newHash = location.hash.replace(hashSelectionRE, "");
+    if(location.hash != newHash){
+        noHashChange++;
+        location.hash = newHash;
+    }
 }
 function classSelect(){
 
