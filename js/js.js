@@ -168,6 +168,16 @@ Clazz.prototype = {
     },
     hashCode: function(){
        return Clazz.hashCode(this);
+    },
+    matchSelfOrParent: function(clazz){
+        if(this.equals(clazz))
+            return true;
+        else {
+            var parent = this;
+            while((parent = parent.parent()) != null)
+                if(parent.equals(clazz)) return true;
+            return false;
+        }
     }
 }
 
@@ -278,7 +288,7 @@ function loadClasses(default_ical_dir){
                         });
 
                         o_events = _.filter(events, function(o){
-                            return o_key.equals(o.class);
+                            return o_key.matchSelfOrParent(o.class);
                         })
 
                         classes[1][clazz_index] = o_parents;
