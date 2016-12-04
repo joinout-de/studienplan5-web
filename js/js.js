@@ -241,6 +241,11 @@ function loadClasses(default_ical_dir){
             var populate_func = function(data_evts){
 
                 events = _.map(data_evts.data, function(event){
+                    event.start = event.time;
+                    if(event.special == "fullWeek"){
+                        event.end = moment(event.time).add(5, "days");
+                        event.allDay = true;
+                    }
                     event.class = Clazz.from_json(event.class);
                     return event;
                 });
@@ -438,14 +443,7 @@ function classSelect(){
         classes[0][this.value].ical_file_link(target);
 
         calendar.fullCalendar('removeEventSources');
-        calendar.fullCalendar('addEventSource', _.map(classes[2][this.value], function(o){
-            o.start = o.time;
-            if(o.special == "fullWeek"){
-                o.end = moment(o.time).add(5, "days");
-                o.allDay = true;
-            }
-            return o;
-        }));
+        calendar.fullCalendar('addEventSource', classes[2][this.value]);
 
         if(!unified){
             $.each(classes[1][this.value], function(index, element){
