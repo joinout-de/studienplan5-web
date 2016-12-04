@@ -70,7 +70,7 @@ gulp.task('reload', ["default"], function() {
 
 // Publish to production
 gulp.task('produce', ['default'], function(){
-    return gulp.src('./dest/**/*', { base: 'dest' })
+    return gulp.src(['./dest/**/*', './dest/**/.htaccess'])
     .pipe(sftp({
         host: 'joinout.de',
         user: 'joinou',
@@ -80,7 +80,7 @@ gulp.task('produce', ['default'], function(){
 
 // Publish to staging
 gulp.task('stage', ['default'], function(){
-    return gulp.src('./dest/**/*', { base: 'dest' })
+    return gulp.src(['./dest/**/*', './dest/**/.htaccess'])
     .pipe(sftp({
         host: 'joinout.de',
         user: 'joinou',
