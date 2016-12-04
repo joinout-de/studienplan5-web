@@ -260,7 +260,8 @@ function loadClasses(default_ical_dir){
                     classes = [[], [], []];
                     classesTable = new Hashtable(Clazz.hashCode, Clazz.equals);
 
-                    var select = $(".toolb select").first();
+                    var select_template = $(Templates.class_select()),
+                        select = $("select", select_template);
 
                     // This popultates both the classes var and the HTML select, why to two loops when we can do one?
 
@@ -311,6 +312,8 @@ function loadClasses(default_ical_dir){
 
                     $(select).removeAttr("disabled");
                     $(select).on("change", classSelect);
+
+                    $('.toolb').html(select_template);
 
                     if(getHashSelection() && select && select[0]){
                         $(select)[0].selectedIndex = Number(getHashSelection());
