@@ -470,14 +470,16 @@ function classSelect(){
         }
 
         $("#cal-links").show();
-        calendar.find('.btn').removeClass("disabled");
         calendar.find('a#download').attr({"href": classes[0][this.value].ical_file_href(), "target": "_blank"});
         calendar.find('a#webcal').attr({"href": classes[0][this.value].ical_file_href(), "target": "_blank"})[0].protocol = "webcal:";
+        calendar.find('.fc-right button').attr('title', '');
+        calendar.find('.btn').removeClass("disabled");
         setHashSelection(this.selectedIndex);
     }
     else{
         $("#cal-links").hide();
         calendar.find('.btn').addClass("disabled");
         calendar.fullCalendar('removeEventSources');
+        calendar.find('.fc-right button').attr('title', $('button', Templates.action_button()).attr('title'));
     }
 }
