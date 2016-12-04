@@ -70,24 +70,20 @@ gulp.task('reload', ["default"], function() {
 
 // Publish to production
 gulp.task('produce', ['default'], function(){
-    return gulp.src(files.concat(fonts), {base: '.'})
-    .pipe(wiredep())
-    .pipe(gulp.dest(dest))
+    return gulp.src(['./dest/**/*', './dest/**/.htaccess'])
     .pipe(sftp({
         host: 'joinout.de',
         user: 'joinou',
-        remotePath: '/public_html/joinoutDE/studienplan5-new'
+        remotePath: '/public_html/joinoutDE/studienplan5'
     }))
 });
 
 // Publish to staging
 gulp.task('stage', ['default'], function(){
-    return gulp.src(files.concat(fonts), {base: '.'})
-    .pipe(wiredep())
-    .pipe(gulp.dest(dest))
+    return gulp.src(['./dest/**/*', './dest/**/.htaccess'])
     .pipe(sftp({
         host: 'joinout.de',
         user: 'joinou',
-        remotePath: '/public_html/joinoutDE/studienplan5-new/stg'
+        remotePath: '/public_html/joinoutDE/studienplan5/staging'
     }))
 });
