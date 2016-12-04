@@ -119,6 +119,12 @@ Clazz.prototype = {
 
         return name + ".ical";
     },
+    ical_file_href: function(){
+        return sprintf("%s/%s", ical_dir, this.ical_file_name());
+    },
+    ical_file_webcal: function(){
+        // TODO
+    },
     ical_file_link: function(into){
 
         var loc, webcal_url, ical_link, links, container;
@@ -314,6 +320,7 @@ function loadClasses(default_ical_dir){
                     $(select).on("change", classSelect);
 
                     $('.toolb').html(select_template);
+                    calendar.find('.fc-right').append(Templates.action_button());
 
                     if(getHashSelection() && select && select[0]){
                         $(select)[0].selectedIndex = Number(getHashSelection());
@@ -455,10 +462,14 @@ function classSelect(){
         }
 
         $("#cal-links").show();
+        calendar.find('.btn').removeClass("disabled");
+        calendar.find('a#download').attr({"href": classes[0][this.value].ical_file_href(), "target": "_blank"});
+        calendar.find('a#webcal').attr({"href": classes[0][this.value].ical_file_href(), "target": "_blank"})[0].protocol = "webcal:";
         setHashSelection(this.selectedIndex);
     }
     else{
         $("#cal-links").hide();
+        calendar.find('.btn').addClass("disabled");
         calendar.fullCalendar('removeEventSources');
     }
 }
