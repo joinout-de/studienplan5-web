@@ -260,7 +260,7 @@ function loadClasses(default_ical_dir){
                     classes = [[], [], []];
                     classesTable = new Hashtable(Clazz.hashCode, Clazz.equals);
 
-                    var select = $(".inner.cover#usage select").first();
+                    var select = $(".toolb select").first();
 
                     // This popultates both the classes var and the HTML select, why to two loops when we can do one?
 
