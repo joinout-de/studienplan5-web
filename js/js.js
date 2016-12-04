@@ -19,7 +19,9 @@ var classes,
     // classes as a hashmap
     classesTable,
     // Whether we need to check for Clazz#full_name is set (for <select> opts)
-    checkForFull;
+    checkForFull,
+    // holds the FullCalendar element
+    calendar;
 
 function Clazz(name, course, cert, jahrgang, group){
     this.name = name;
@@ -117,6 +119,12 @@ Clazz.prototype = {
 
         return name + ".ical";
     },
+    ical_file_href: function(){
+        return sprintf("%s/%s", ical_dir, this.ical_file_name());
+    },
+    ical_file_webcal: function(){
+        // TODO
+    },
     ical_file_link: function(into){
 
         var loc, webcal_url, ical_link, links, container;
@@ -128,14 +136,11 @@ Clazz.prototype = {
 
         links = $("<span>");
 
-        container = $("<p>").html(this.simple(false) + ": <br/>").appendTo(links);
+        container = $("<p>").html(this.simple(false) + ": ").appendTo(links);
 
-        $("<label>").html("URL: ").appendTo(container);
-        $("<input>").attr({"type": "text", "value": window.location.origin + window.location.pathname + ical_link, "disabled": "true"}).appendTo(container);
-        $(container).append("<br>");
-        $("<a>").attr({"href": ical_link, "target": "_blank"}).html(".ics herunterladen").appendTo(container);
-        $(container).append("<br>");
-        $("<a>").attr({"href": sprintf("%s/%s/%s", webcal_url, ical_dir, this.ical_file_name()), "target": "_blank"}).html("webcal öffnen (Outlook)").appendTo(container);
+        $("<a>").attr({"href": ical_link, "target": "_blank"}).html("Kalender als Datei herunterladen").appendTo(container);
+        $(container).append(" | ");
+        $("<a>").attr({"href": sprintf("%s/%s/%s", webcal_url, ical_dir, this.ical_file_name()), "target": "_blank"}).html("Kalender in Outlook öffnen").appendTo(container);
 
         $(container).appendTo(links);
 
@@ -242,6 +247,11 @@ function loadClasses(default_ical_dir){
             var populate_func = function(data_evts){
 
                 events = _.map(data_evts.data, function(event){
+                    event.start = event.time;
+                    if(event.special == "fullWeek"){
+                        event.end = moment(event.time).add(5, "days");
+                        event.allDay = true;
+                    }
                     event.class = Clazz.from_json(event.class);
                     return event;
                 });
@@ -256,7 +266,8 @@ function loadClasses(default_ical_dir){
                     classes = [[], [], []];
                     classesTable = new Hashtable(Clazz.hashCode, Clazz.equals);
 
-                    var select = $(".inner.cover#usage select").first();
+                    var select_template = $(Templates.class_select()),
+                        select = $("select", select_template);
 
                     // This popultates both the classes var and the HTML select, why to two loops when we can do one?
 
@@ -308,6 +319,9 @@ function loadClasses(default_ical_dir){
                     $(select).removeAttr("disabled");
                     $(select).on("change", classSelect);
 
+                    $('.toolb').html(select_template);
+                    calendar.find('.fc-right').append(Templates.action_button());
+
                     if(getHashSelection() && select && select[0]){
                         $(select)[0].selectedIndex = Number(getHashSelection());
                         console.log("loadClasses / Hash Selection:");
@@ -342,6 +356,14 @@ $(document).ready(function(){
     $(".inner.cover").hide();
     $(".inner.cover#home").show();
     $(".nav li#curr-home").addClass("active");
+
+    calendar = $('.calendar');
+    calendar.html('');
+    calendar.fullCalendar({
+        locale: 'de'
+    });
+
+    loadClasses();
 
     $(window).on("hashchange", hashChange);
 
@@ -381,6 +403,11 @@ function hashChange(evt){
             $(".nav li.active").removeClass("active");
             $(".nav li#curr-" + target.replace("#", "")).addClass("active");
 
+            if(target == '#usage')
+                $(document).ready(function(){
+                    calendar.fullCalendar('render');
+                });
+
             if(selection_match){
                 var select = $(".inner.cover#usage select");
                 if(select && select[0] && !select[0].disabled){
@@ -416,14 +443,17 @@ function removeHashSelection(){
 }
 function classSelect(){
 
-    var target = $($(".inner.cover#usage #icals ul#cal-links"))
+    var target = $("#cal-links");
     target.html("");
 
     console.log("select.value %s", this.value);
 
     if(String(this.value) && this.value != -1){
 
-        classes[0][this.value].ical_file_link($("<li>")).appendTo(target);
+        classes[0][this.value].ical_file_link(target);
+
+        calendar.fullCalendar('removeEventSources');
+        calendar.fullCalendar('addEventSource', classes[2][this.value]);
 
         if(!unified){
             $.each(classes[1][this.value], function(index, element){
@@ -431,10 +461,15 @@ function classSelect(){
             });
         }
 
-        $(".inner.cover#usage #icals").show();
+        $("#cal-links").show();
+        calendar.find('.btn').removeClass("disabled");
+        calendar.find('a#download').attr({"href": classes[0][this.value].ical_file_href(), "target": "_blank"});
+        calendar.find('a#webcal').attr({"href": classes[0][this.value].ical_file_href(), "target": "_blank"})[0].protocol = "webcal:";
         setHashSelection(this.selectedIndex);
     }
     else{
-        $(".inner.cover#usage #icals").hide();
+        $("#cal-links").hide();
+        calendar.find('.btn').addClass("disabled");
+        calendar.fullCalendar('removeEventSources');
     }
 }

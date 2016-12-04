@@ -76,12 +76,9 @@
                         <div class="inner cover" id="usage">
                             <h1 class="cover-heading">Klasse</h1>
                             <p>
-                            <form action="#">
-                                <select disabled>
-                                    <option>Klassen werden geladen, ist JavaScript aktiviert?</option>
-                                </select>
-                            </form>
                             </p>
+                            <div class="toolb form-inline">Laden...</div>
+                            <div class="calendar">Lade Kalender...</div>
                             <p>Alle .ics-Dateien kannst du <a href="SS16">hier</a> einsehen.</p> <!-- TODO: make SS16 "dynamic" -->
                             <p><a href="calhelp.html" target="_blank">Zur Hilfe, wie du die Kalenderdatei verwenden kannst.</a></p>
                             <div id="icals" style="display: none;">
@@ -131,8 +128,8 @@
                 <!-- bower:js -->
                 <!-- endbower -->
 
+            <script src="bower_components/fullcalendar/dist/locale/de.js"></script>
             <script src="templates.js"></script>
             <script src="js/js.js"></script>
-            <script type="text/javascript">loadClasses();</script>
     </body>
 </html>
