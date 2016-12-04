@@ -5,6 +5,9 @@
  * https://github.com/criztovyl/studienplan5
  */
 
+// Setup Logger
+Logger.useDefaults();
+
 // Data w/ JS classes instead of JSON objects.
 // 0 - keys, Clazz
 // 1 - values, Clazz-es, key's parents
@@ -23,7 +26,9 @@ var classes,
     // holds the FullCalendar element
     calendar,
     // prevent endless loops when we change the location hash ourselves
-    noHashChange = 0;
+    noHashChange = 0,
+    // logger
+    logger = Logger.get("studienplan5-web");
 
 function Clazz(name, course, cert, jahrgang, group){
     this.name = name;
@@ -44,9 +49,8 @@ Clazz.from_json = function(json){
         return new Clazz(v[0], v[1], v[2], v[3], v[4])
     }
     else {
-        console.warn(json["json_class"] + " is not a Clazz!");
-        //console.log("-");
-        //console.debug(json);
+        logger.warn(json["json_class"] + " is not a Clazz!");
+        logger.debug(json);
         return false;
     }
 }
@@ -190,8 +194,8 @@ Clazz.prototype = {
 
 function loadClasses(default_ical_dir){
     $.ajax("classes.json").done(function(data){
-        console.log("Loaded classes");
-        console.log(sprintf("JSON file version: %s", data.json_data_version));
+        logger.debug("Loaded classes");
+        logger.info("JSON file version:", data.json_data_version);
 
         var keyys, values, loadEvents = true;
 
@@ -202,7 +206,7 @@ function loadClasses(default_ical_dir){
             if(Number(json_data_version[1]) >= 1){
                 ical_dir = data.ical_dir;
                 unified = data.unified;
-                default_ical_dir && console.info("Called loadClasses with a parameter but classes.json is new enough.");
+                default_ical_dir && logger.debug("Called loadClasses with a parameter but classes.json is new enough.");
             }
             else {
                 ical_dir = default_ical_dir || "ical";
@@ -220,7 +224,7 @@ function loadClasses(default_ical_dir){
                         values = data.data.values;
                     }
                     else {
-                        console.error("Is no object with json_object_keys!");
+                        logger.error("Is no object with json_object_keys!");
                     }
                     break;
                 case 1:
@@ -231,17 +235,17 @@ function loadClasses(default_ical_dir){
 
                     }
                     else {
-                        console.error("Stringified keys are not supportet yet.");
+                        logger.error("Stringified keys are not supportet yet.");
                     }
                     break;
                 default:
-                    console.error("Unsupported 1.x version.");
+                    logger.error("Unsupported 1.x version.");
                     break;
 
             }
         }
         else {
-            console.error("Unknown/Unspported JSON data version: " + json_data_version.join("."));
+            logger.error("Unknown/Unspported JSON data version: " + json_data_version.join("."));
         }
 
         // Magic happens here: undo JSON object keys.
@@ -258,7 +262,7 @@ function loadClasses(default_ical_dir){
                     return event;
                 });
 
-                console.log("Loaded events");
+                logger.debug("Loaded events");
 
                 $(document).ready(function(){
 
@@ -273,7 +277,7 @@ function loadClasses(default_ical_dir){
 
                     // This popultates both the classes var and the HTML select, why to two loops when we can do one?
 
-                    console.log("Document ready");
+                    logger.debug("Document ready");
 
                     select.html("");
                     $("<option>").html("Bitte auswählen...").attr("value", -1).appendTo(select);
@@ -326,8 +330,7 @@ function loadClasses(default_ical_dir){
 
                     if(getHashSelection() && select && select[0]){
                         $(select)[0].selectedIndex = Number(getHashSelection());
-                        console.log("loadClasses / Hash Selection:");
-                        console.log(getHashSelection());
+                        logger.debug("loadClasses / Hash Selection:", getHashSelection());
                         $(select).change();
                     }
 
@@ -341,13 +344,13 @@ function loadClasses(default_ical_dir){
                     populate_func(undefined);
                 });
             else{
-                console.log("Configured not to load data.json.");
+                logger.info("Configured not to load data.json.");
                 populate_func(undefined);
             }
 
         }
         else {
-            console.error("Could not process classes! (empty)");
+            logger.error("Could not process classes! (empty)");
         }
     });
 }
@@ -386,10 +389,11 @@ $(document).ready(function(){
 
 function hashChange(evt){
 
+    logger.debug("Hash change? ", location.href);
     if(noHashChange-- == 0){
         noHashChange = 0;
 
-        console.log("Hash change!");
+        logger.debug("Hash change!");
 
         var target = window.location.hash; // Location hash incl. #. Keep it.
 
@@ -413,8 +417,7 @@ function hashChange(evt){
             if(selection_match){
                 var select = $(".inner.cover#usage select");
                 if(select && select[0] && !select[0].disabled){
-                    console.log("hashChange / getHashSelection:");
-                    console.log(getHashSelection());
+                    logger.debug("hashChange / getHashSelection:", getHashSelection());
                     $(select)[0].selectedIndex = Number(getHashSelection());
                     $(select).change();
                 }
@@ -422,7 +425,7 @@ function hashChange(evt){
         }
     }
     else {
-        console.log("noHashChange: " + noHashChange);
+        logger.debug("noHashChange:", noHashChange);
     }
 }
 
@@ -451,7 +454,7 @@ function classSelect(){
     var target = $("#cal-links");
     target.html("");
 
-    console.log("select.value %s", this.value);
+    logger.debug("select.value", this.value);
 
     if(String(this.value) && this.value != -1){
 
