@@ -1,5 +1,10 @@
+// gulp itself
 var gulp = require('gulp');
+
+// sftp
 var sftp = require('gulp-sftp');
+
+// wiredep
 var wiredep = require('wiredep').stream;
 var mainBowerFiles = require('main-bower-files');
 
@@ -9,8 +14,11 @@ var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var concat = require('gulp-concat');
 
+// BrowserSync
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+
+// Variables
 
 var bc = "bower_components/"
 
@@ -18,13 +26,14 @@ var dest = "dest";
 var files = ["*.html", "css/*.css", "js/*.js"].concat(mainBowerFiles());
 var fonts = [ bc + "bootstrap/dist/fonts/*" ];
 
-// bower task handles index.html
+// default
 gulp.task('default', ['fonts', 'templates'], function() {
     gulp.src(files, {base: '.'})
     .pipe(wiredep())
     .pipe(gulp.dest(dest));
 });
 
+// copy fonts
 gulp.task('fonts', function(){
     gulp.src(fonts, {base: '.'})
     .pipe(gulp.dest(dest));
@@ -43,10 +52,7 @@ gulp.task('templates', function(){
     .pipe(gulp.dest(dest, { base: '.' }));
 });
 
-gulp.task('clean', function() {
-});
-
-// watch files for changes and reload
+// BrowserSync; Watch files for changes and reload
 gulp.task('serve', ["default"], function() {
   browserSync({
     server: {
@@ -57,10 +63,12 @@ gulp.task('serve', ["default"], function() {
   gulp.watch([files].concat(['templates/*.hbs']), {cwd: "."}, ["reload"]);
 });
 
+// Reload BrowerSync browsers
 gulp.task('reload', ["default"], function() {
     reload();
 });
 
+// Publish to production
 gulp.task('produce', ['default'], function(){
     return gulp.src(files.concat(fonts), {base: '.'})
     .pipe(wiredep())
@@ -72,6 +80,7 @@ gulp.task('produce', ['default'], function(){
     }))
 });
 
+// Publish to staging
 gulp.task('stage', ['default'], function(){
     return gulp.src(files.concat(fonts), {base: '.'})
     .pipe(wiredep())
