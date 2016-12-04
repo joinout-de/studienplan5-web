@@ -168,6 +168,16 @@ Clazz.prototype = {
     },
     hashCode: function(){
        return Clazz.hashCode(this);
+    },
+    matchSelfOrParent: function(clazz){
+        if(this.equals(clazz))
+            return true;
+        else {
+            var parent = this;
+            while((parent = parent.parent()) != null)
+                if(parent.equals(clazz)) return true;
+            return false;
+        }
     }
 }
 
@@ -230,7 +240,11 @@ function loadClasses(default_ical_dir){
         if(keyys){
             var populate_func = function(data_evts){
 
-                events = data_evts;
+                events = _.map(data_evts.data, function(event){
+                    event.class = Clazz.from_json(event.class);
+                    return event;
+                });
+
                 console.log("Loaded events");
 
                 $(document).ready(function(){
@@ -273,8 +287,8 @@ function loadClasses(default_ical_dir){
                             classes[0].push(clazz);
                         });
 
-                        o_events = _.filter((events && events.data) || [], function(o){
-                            return Clazz.from_json(o.class).equals(o_key);
+                        o_events = _.filter(events, function(o){
+                            return o_key.matchSelfOrParent(o.class);
                         })
 
                         classes[1][clazz_index] = o_parents;
@@ -288,12 +302,6 @@ function loadClasses(default_ical_dir){
                             value_container.events = value_container.events.concat(o_events);
                         }
 
-                    });
-
-                    $.each(classes[2], function(index, events){
-                        $.each(events, function(index, event){
-                            event.class = Clazz.from_json(event.class);
-                        });
                     });
 
                     $(select).removeAttr("disabled");
