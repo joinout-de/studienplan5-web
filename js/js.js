@@ -376,8 +376,8 @@ $(document).ready(function(){
     // // but please credit me and/or link to my site
     //
     var cloaked = 'join' + 'out' + '.com';
-    cloaked = cloaked.replace(".com", ".de");
-    cloaked = ('ch' + '.schulz' + '@' + cloaked);
+    cloaked = cloaked.replace(".com", ".de"); // Suuuper paranoid
+    cloaked = ('cr' + 'iztovyl' + '@' + cloaked);
     $("#contact #mail a").attr("href", "mailto:" + cloaked).html(cloaked);
 
 });
