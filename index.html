@@ -51,6 +51,19 @@
                     <ul class="nav navbar-nav">
                         <li id="curr-home"><a href="#home">Startseite</a></li>
                         <li id="curr-usage" ><a href="#usage">Nutzen</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hilfe <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#help">Hilfe</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li id="curr-outlook"><a href="#outlook">Outlook</a></li>
+                                <li id="curr-googlecal"><a href="#googlecal">Google Calendar</a></li>
+                                <!--<li id="curr-iphone"><a href="#iphone">iPhone</a></li>-->
+                                <li id="curr-wp"><a href="#wp">Windows Phone</a></li>
+                                <li id="curr-thunderbird-lightning"><a href="#thunderbird-lightning">Thunderbird w/ Lightning</a></li>
+                                <li id="curr-evolution"><a href="#evolution">Evolution</a></li>
+                            </ul>
+                        </li>
                         <li id="curr-contact"><a href="#contact">Kontakt</a></li>
                         <li id="curr-about"><a href="#about">Über</a></li>
                     </ul>
@@ -80,7 +93,7 @@
                 <div class="toolb form-inline">Laden...</div>
                 <div class="calendar">Lade Kalender...</div>
                 <p>Alle .ics-Dateien kannst du <a href="SS16">hier</a> einsehen.</p> <!-- TODO: make SS16 "dynamic" -->
-                <p><a href="calhelp.html" target="_blank">Zur Hilfe, wie du die Kalenderdatei verwenden kannst.</a></p>
+                <p><a href="#help" target="_blank">Zur Hilfe, wie du die Kalenderdatei verwenden kannst.</a></p>
                 <div id="icals" style="display: none;">
                     <h2>ics-Datei</h2>
                     <ul class="list-unstyled" id="cal-links"></ul>
@@ -115,6 +128,121 @@
                     <a href="https://github.com/joinout-de/studienplan5-web" target="_blank">Website</a> |
                     <a href="https://github.com/joinout-de/studienplan5" target="_blank">Calendar creator</a></p>
                 </div>
+            </div>
+
+            <!-- Help -->
+
+
+            <div class="inner cover" id="help">
+                <h1 class="cover-heading">Verwendung</h1>
+                <h2>Semesterplan im Kalender anzeigen</h2>
+                <ol>
+                    <li>Auf der Startseite den "Gimme!"-Button drücken</li>
+                    <li>Im "Klasse"-Auswahlfeld deine Klasse auswählen</li>
+                    <li>Dein Kalender wird jetzt angezeigt :)</li>
+                </ol>
+                <h2>Semesterplan als Kalender abonnieren</h2>
+                <ol>
+                    <li>Auf der Startseite den "Gimme!"-Button drücken</li>
+                    <li>Im "Klasse"-Auswahlfeld deine Klasse auswählen</li>
+                    <li>Dein Kalender wird jetzt angezeigt :)</li>
+                    <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
+                    <li>Rechtsklick auf "Kalender herunterladen"</li>
+                    <li>Adresse kopieren / Ziel kopieren</li>
+                    <li>Oben unter "Hilfe" deine bevorzugte Anwendung raussuchen und dort fortsetzen.</li>
+                </ol>
+            </div>
+
+            <div class="inner cover" id="outlook">
+                <h1 class="cover-heading">Outlook</h1>
+                <p>Für Outlook kannst du einfach den "webcal öffen"-Link nutzen.</p>
+                <p>Sollte das nicht funktionieren:
+                <ul>
+                    <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
+                    <li>Rechtsklick auf "Kalender herunterladen"</li>
+                    <li>Adresse kopieren / Ziel kopieren</li>
+                    <li>Outlook und dann den Kalender öffnen</li>
+                    <li>Kalender &rarr; Hinzufügen &rarr; Online/Internet</li>
+                    <li>Hier die oben kopierte Adresse einfügen</li>
+                    <li>Fertig.</li>
+                </ul>
+                <p class="loc-warn">Je nach Spracheinstellungen und Outlook-/Office-Version können die jeweiligen Punkte anders beschriftet sein.</p>
+                <p>
+            </div>
+
+            <div class="inner cover" id="googlecal">
+                <h1 class="cover-heading">Google Calendar</h1>
+                <p>Bitte nutze folgende Schritte um den Kalender in deinen Google Kalender hinzuzufügen:
+                <ul>
+                    <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
+                    <li>Rechtsklick auf "Kalender herunterladen"</li>
+                    <li>Adresse kopieren / Ziel kopieren</li>
+                    <li>Google Calendar öffnen.</li>
+                    <li>Auf das Dreieck nach unten bei "Andere Kalender" klicken und "Von URL hinzufügen" wählen.</li>
+                    <li>Link von oben einfügen und "Hinzufügen" klicken.</li>
+                    <li>Fertig.</li>
+                </ul>
+                <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
+                </p>
+                <p>Solltest du eine Möglichkeit gefunden haben das automatisch zu machen, <a href="https://github.com/criztovyl/studienplan5/issues/new" target="_blank">öffne bitte ein GitHub Issue</a> oder schreib mir eine <a href="#contact">Mail</a>.</p>
+                <p>
+            </div>
+
+            <div class="inner cover" id="thunderbird-lightning">
+                <h1 class="cover-heading">Thunderbird mit Lighning</h1>
+                <p>Bitte nutze folgende Schritte um den Kalender in dein Thunderbird hinzuzufügen:
+                <ul>
+                    <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
+                    <li>Rechtsklick auf "Kalender herunterladen"</li>
+                    <li>Adresse kopieren / Ziel kopieren</li>
+                    <li>Thunderbird und dann Kalender öffnen.</li>
+                    <li>Rechtsklick auf die Kalenderlist und "Hinzufügen" wählen.</li>
+                    <li>Link von oben einfügen und "Hinzufügen" klicken.</li>
+                    <li>Fertig.</li>
+                </ul>
+                <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
+                </p>
+                <p>Solltest du eine Möglichkeit gefunden haben das automatisch zu machen, <a href="https://github.com/criztovyl/studienplan5/issues/new" target="_blank">öffne bitte ein GitHub Issue</a> oder schreib mir eine <a href="#contact">Mail</a>.</p>
+                <p>
+            </div>
+
+            <div class="inner cover" id="evolution">
+                <h1 class="cover-heading">Evolution</h1>
+                <p>Bitte nutze folgende Schritte um den Kalender in dein Evolution hinzuzufügen:
+                <ul>
+                    <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
+                    <li>Rechtsklick auf "Kalender herunterladen"</li>
+                    <li>Adresse kopieren / Ziel kopieren</li>
+                    <li>Oben links "Hinzufügen" und dann "Kalender" wählen.</li>
+                    <li>Bei Typ "Web" auswählen.</li>
+                    <li>Link von oben einfügen und "Hinzufügen" klicken.</li>
+                    <li>Aktualisierung auf gewünschte Zeit einstellen. (1x je Woche sollte genügen)</li>
+                    <li>ggf. "Sichere Verbindung" aktivieren. (empfohlen)</li>
+                    <li>Restliche Felder ignorieren.</li>
+                    <li>Fertig.</li>
+                </ul>
+                <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
+                <p>
+            </div>
+
+            <div class="inner cover" id="wp">
+                <h1 class="cover-heading">Windows Phone</h1>
+                <p>Um den Kalendar auf deinem Windows Phone zu nutzen, ist es das einfachste ihn in deinen Live Kalender hinzuzufügen. Er sollte dann in der Kalender-App erscheinen.</p>
+                <p class="small">Vorrausgesetzt du hast dein Windows Phone mit deiner Live ID verknüpft.</p>
+                <p>Bitte nutze folgende Schritte um ihn hinzuzufügen:
+                <ul>
+                    <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
+                    <li>Rechtsklick auf "Kalender herunterladen"</li>
+                    <li>Adresse kopieren / Ziel kopieren</li>
+                    <li><a href="https://calendar.live.com" target="blank">calendar.live.com</a> aufrufen (öffnet in neuem Tab/Fenster) und ggf. anmelden.</li>
+                    <li>Oben in der Leiste "Importieren" wählen</li>
+                    <li>Links auf "Abbonieren" klicken.</li>
+                    <li>Link von oben in "Kalender URL" einfügen und einen Namen vergeben.</li>
+                    <li>"Abbonieren" klicken.</li>
+                    <li>Fertig. Der Kalender sollte jetzt in der Kalender-App angezeigt werden.</li>
+                </ul>
+                <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
+                <p>
             </div>
 
         </div>
