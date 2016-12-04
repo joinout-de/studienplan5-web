@@ -8,6 +8,10 @@
     "browser-sync": "^2.14.3",
     "gulp": "^3.9.1",
     "gulp-sftp": "^0.1.5",
+    "gulp-concat": "^2.6.1",
+    "gulp-declare": "^0.3.0",
+    "gulp-handlebars": "^4.0.0",
+    "gulp-wrap": "^0.13.0",
     "main-bower-files": "^2.13.1",
     "wiredep": "^4.0.0"
   },
