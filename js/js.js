@@ -480,6 +480,7 @@ function classSelect(){
         $("#modal").hide();
 
         setHashSelection(this.selectedIndex);
+
     }
     else{
         $("#cal-links").hide();
