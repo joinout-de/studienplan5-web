@@ -495,5 +495,7 @@ function classSelect(){
 
         $(".help-wo-link").show();
         $(".help-w-link").html();
+
+        removeHashSelection();
     }
 }
