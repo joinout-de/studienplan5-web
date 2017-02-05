@@ -326,6 +326,8 @@ function loadClasses(default_ical_dir){
                     $(select).removeAttr("disabled");
                     $(select).on("change", classSelect);
 
+                    $('.toolb').html();
+                    $('.toolb').removeClass('navbar-text').addClass('navbar-form');
                     $('.toolb').html(select_template);
                     calendar.find('.fc-right').append(Templates.action_button());
 
