@@ -11,3 +11,34 @@ p.lead, #about > div {
  .inner.cover {
      padding-top: 55px;
  }
+
+/* Modal */
+.calendar {
+    position: relative;
+}
+
+.calendar div.modal-container {
+
+    position: absolute;
+    z-index: 100;
+    top: 0px;
+    left: -10px;
+    bottom: 0px;
+    right: -10px;
+
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.modal-container  > div {
+
+    z-index: 105;
+
+    width: 30%;
+    margin: 10% auto;
+    text-align: center;
+
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+}

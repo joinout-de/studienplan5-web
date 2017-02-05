@@ -280,6 +280,7 @@ function loadClasses(default_ical_dir){
                     logger.debug("Document ready");
 
                     select.html("");
+                    $("#modal > div").html("Bitte Klasse auswählen.");
                     $("<option>").html("Bitte auswählen...").attr("value", -1).appendTo(select);
 
                     $.each(keyys, function(index, element){
@@ -366,7 +367,6 @@ $(document).ready(function(){
         window.location.hash="home";
 
     calendar = $('.calendar');
-    calendar.html('');
     calendar.fullCalendar({
         locale: 'de',
         header: {
@@ -375,6 +375,7 @@ $(document).ready(function(){
             right:  'today prev,next month,listMonth'
         }
     });
+    $("#modal > div").html("Lade Daten...");
 
     loadClasses();
 
@@ -420,6 +421,7 @@ function hashChange(evt){
             if(target == '#usage')
                 $(document).ready(function(){
                     calendar.fullCalendar('render');
+                    $("#modal").addClass("modal-container");
                 });
 
             if(selection_match){
@@ -487,8 +489,10 @@ function classSelect(){
 
         $(".help-wo-link").hide();
         $(".help-w-link").html(Templates.help_copy_link({"link": location.href.replace(location.hash, '') + href}));
+        $("#modal").hide();
 
         setHashSelection(this.selectedIndex);
+
     }
     else{
         $("#cal-links").hide();
@@ -500,5 +504,8 @@ function classSelect(){
         $(".help-w-link").html();
 
         removeHashSelection();
+
+        $("#modal").show();
+        $("#modal > div").html("Bitte Klasse auswählen.");
     }
 }
