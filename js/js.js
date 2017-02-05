@@ -359,8 +359,11 @@ $(document).ready(function(){
 
     $(".nojs").hide();
     $(".inner.cover").hide();
-    $(".inner.cover#home").show();
-    $(".nav li#curr-home").addClass("active");
+    //$(".inner.cover#home").show();
+    //$(".nav li#curr-home").addClass("active");
+
+    if(window.location.hash == "")
+        window.location.hash="home";
 
     calendar = $('.calendar');
     calendar.html('');
