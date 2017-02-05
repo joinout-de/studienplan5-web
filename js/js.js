@@ -370,12 +370,29 @@ $(document).ready(function(){
     calendar.fullCalendar({
         locale: 'de',
         header: {
-            left:   'title',
-            center: '',
-            right:  'today prev,next month,listMonth'
+            left:   'prev,today,next',
+            center: 'title',
+            right:  'month,listMonth'
+        },
+        eventClick: function(evt){
+            var title_nr = sprintf("%s%s", evt.title, evt.nr ? "#" + evt.nr : "");
+            var room_lect = sprintf(" (%s%s%s)", evt.room ? "Raum " + evt.room : "",  evt.room && evt.lect ? "; " : "", evt.lect ? evt.lect : "");
+            var str = sprintf("%s%s", title_nr, room_lect == " ()" ? "" : room_lect);
+            alert(str);
         }
     });
+
     $("#modal > div").html("Lade Daten...");
+
+    $(".calendar").swipe( {
+        //Generic swipe handler for all directions
+        swipeLeft:function() {
+            calendar.fullCalendar("next");
+        },
+        swipeRight: function(){
+            calendar.fullCalendar("prev");
+        }
+    });
 
     loadClasses();
 
