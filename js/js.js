@@ -365,7 +365,12 @@ $(document).ready(function(){
     calendar = $('.calendar');
     calendar.html('');
     calendar.fullCalendar({
-        locale: 'de'
+        locale: 'de',
+        header: {
+            left:   'title',
+            center: '',
+            right:  'today prev,next month,listMonth'
+        }
     });
 
     loadClasses();
