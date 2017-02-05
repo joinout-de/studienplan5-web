@@ -280,6 +280,7 @@ function loadClasses(default_ical_dir){
                     logger.debug("Document ready");
 
                     select.html("");
+                    $("#modal > div").html("Bitte Klasse auswählen.");
                     $("<option>").html("Bitte auswählen...").attr("value", -1).appendTo(select);
 
                     $.each(keyys, function(index, element){
@@ -363,10 +364,10 @@ $(document).ready(function(){
     $(".nav li#curr-home").addClass("active");
 
     calendar = $('.calendar');
-    calendar.html('');
     calendar.fullCalendar({
         locale: 'de'
     });
+    $("#modal > div").html("Lade Daten...");
 
     loadClasses();
 
@@ -412,6 +413,7 @@ function hashChange(evt){
             if(target == '#usage')
                 $(document).ready(function(){
                     calendar.fullCalendar('render');
+                    $("#modal").addClass("modal-container");
                 });
 
             if(selection_match){
@@ -474,6 +476,9 @@ function classSelect(){
         calendar.find('a#webcal').attr({"href": classes[0][this.value].ical_file_href(), "target": "_blank"})[0].protocol = "webcal:";
         calendar.find('.fc-right button').attr('title', '');
         calendar.find('.btn').removeClass("disabled");
+
+        $("#modal").hide();
+
         setHashSelection(this.selectedIndex);
     }
     else{
@@ -481,5 +486,8 @@ function classSelect(){
         calendar.find('.btn').addClass("disabled");
         calendar.fullCalendar('removeEventSources');
         calendar.find('.fc-right button').attr('title', $('button', Templates.action_button()).attr('title'));
+
+        $("#modal").show();
+        $("#modal > div").html("Bitte Klasse auswählen.");
     }
 }
