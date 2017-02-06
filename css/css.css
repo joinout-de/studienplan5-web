@@ -16,7 +16,7 @@ body > .container {
     margin-right: auto;
 }
 
-p.lead, #about > div > p, .inner.cover.center {
+p.lead, #about > div > p, .inner.cover.center, .modal-container p {
     text-align: center;
 }
 
