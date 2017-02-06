@@ -35,6 +35,7 @@ p.lead, #about > div {
     z-index: 105;
 
     width: 30%;
+    min-width: 180px;
     margin: 10% auto;
     text-align: center;
 
