@@ -411,7 +411,7 @@ $(document).ready(function(){
     var cloaked = 'join' + 'out' + '.com';
     cloaked = cloaked.replace(".com", ".de"); // Suuuper paranoid
     cloaked = ('cr' + 'iztovyl' + '@' + cloaked);
-    $("#contact #mail a").attr("href", "mailto:" + cloaked).html(cloaked);
+    $("#contact #mail a").attr("href", "mailto:" + cloaked);
 
 });
 

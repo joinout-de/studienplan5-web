@@ -50,7 +50,7 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li id="curr-home"><a href="#home">Startseite</a></li>
-                        <li id="curr-usage" ><a href="#usage">Nutzen</a></li>
+                        <li id="curr-usage" ><a href="#usage">Kalender</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hilfe <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -79,9 +79,8 @@
             </div>
 
 
-            <div class="inner cover" id="home">
-                <h1 class="cover-heading"></h1>
-                <p class="lead">Semesterplan für's Studium als Kalender.</p>
+            <div class="inner cover center" id="home">
+                <h1>Semesterplan für's Studium als Kalender</h1>
                 <p class="lead">
                 <a href="#usage" class="btn btn-lg btn-default">Gib' her!</a>
                 </p>
@@ -92,6 +91,10 @@
 
             <div class="inner cover" id="usage">
                 <div class="calendar">
+                    <p class="nojs text-warning bg-warning">
+                        Ohne JavaScript kannst du dir den Kalender leider nicht anschauen.
+                        Du kannst dir aber <a href="WS16">hier</a> alle .ics-Dateien ansehen. Wenn du deine Datei gefunden hast, kannst du sie aber trotzdem wie weiter unten bei <a href="#help">Verwendung</a> beschrieben verwenden :)
+                    </p>
                     <div id="modal">
                         <div>Lade Kalender...</div>
                     </div>
@@ -105,18 +108,19 @@
                 </div>
             </div>
 
-            <div class="inner cover" id="contact">
-                <h1 class="cover-heading">Kontakt</h1>
-                <p>Report a Bug:
+            <div class="inner cover center" id="contact">
+                <h1>Kontakt</h1>
+                <p class="lead">Report a Bug<br/>
                 <a href="https://github.com/joinout-de/studienplan5-web/issues/new" target="_blank">Website</a> |
                 <a href="https://github.com/joinout-de/studienplan5/issues/new" target="_blank">Calendar data</a>
                 </p>
-                <ul>
-                    <li id="mail">eMail: <a>ch (punkt) schulz (ädd) joinout (punkt) de</a></li>
-                    <li>Telegram: <a href="https://telegram.me/criztovyl" target="_blank">@criztovyl</a></li>
-                    <li>Twitter: <a href="https://twitter.com/criztovyl" target="_blank">@criztovyl</a></li>
-                    <li>GitHub: <a href="https://gitlab.com/studienplan5" target="_blank">criztovyl</a></li>
-
+                <p class="lead">@criztovyl
+                <ul class="list-inline">
+                    <li id="mail"><a href="mailto:NOSPAMcriztovyl(ätt)joinout(dot)de" target="_blank"><span class="fa fa-envelope" aria-hidden="true"></span>&nbsp; Mail</a></li>
+                    <li><a href="https://t.me/criztovyl" target="_blank"><span class="fa fa-telegram" aria-hidden="true"></span>&nbsp; Telegram</a></li>
+                    <li><a href="https://twitter.com/criztovyl" target="_blank"><span class="fa fa-twitter" aria-hidden="true"></span>&nbsp; Twitter</a></li>
+                    <li><a href="https://gitlab.com/criztovyl" target="_blank"><span class="fa fa-gitlab" aria-hidden="true"></span>&nbsp; GitLab</a></li>
+                    <li><a href="https://github.com/criztovyl" target="_blank"><span class="fa fa-github" aria-hidden="true"></span>&nbsp; GitHub</a></li>
                 </ul>
             </div>
 
@@ -223,9 +227,7 @@
                     <li>Fertig.</li>
                 </ul>
                 <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
-                </p>
                 <p>Solltest du eine Möglichkeit gefunden haben das automatisch zu machen, <a href="https://gitlab.com/studienplan5/studienplan5/issues/" target="_blank">öffne bitte ein GitLab Issue</a> oder schreib mir eine <a href="#contact">Mail</a>.</p>
-                <p>
             </div>
 
             <div class="inner cover" id="thunderbird-lightning">
@@ -244,9 +246,7 @@
                     <li>Fertig.</li>
                 </ul>
                 <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
-                </p>
                 <p>Solltest du eine Möglichkeit gefunden haben das automatisch zu machen, <a href="https://gitlab.com/studienplan5/studienplan5/issues/" target="_blank">öffne bitte ein GitLab Issue</a> oder schreib mir eine <a href="#contact">Mail</a>.</p>
-                <p>
             </div>
 
             <div class="inner cover" id="evolution">
@@ -268,7 +268,6 @@
                     <li>Fertig.</li>
                 </ul>
                 <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
-                <p>
             </div>
 
             <div class="inner cover" id="wp">
@@ -291,7 +290,6 @@
                     <li>Fertig. Der Kalender sollte jetzt in der Kalender-App angezeigt werden.</li>
                 </ul>
                 <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
-                <p>
             </div>
 
         </div>
