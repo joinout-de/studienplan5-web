@@ -280,7 +280,7 @@ function loadClasses(default_ical_dir){
                     logger.debug("Document ready");
 
                     select.html("");
-                    $("#modal > div").html("Bitte Klasse auswählen.");
+                    $("#modal > div").html("<p>Bitte Klasse auswählen.</p><p class=\"visible-xs\">Das Formular befindet sich im Menü.</p>");
                     $("<option>").html("Bitte auswählen...").attr("value", -1).appendTo(select);
 
                     $.each(keyys, function(index, element){
@@ -525,6 +525,6 @@ function classSelect(){
         removeHashSelection();
 
         $("#modal").show();
-        $("#modal > div").html("Bitte Klasse auswählen.");
+        $("#modal > div").html("<p>Bitte Klasse auswählen.</p><p>Das Formular befindet sich im Menü.</p>");
     }
 }
