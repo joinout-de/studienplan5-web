@@ -2,7 +2,7 @@
     (c) 2016 Christoph "criztovyl" Schulz
     GPLv3 and later.
     Part of studienplan5, a util to convert HTMLed-XLS Studienplände into iCal files.
-    https://github.com/criztovyl/studienplan5
+    https://gitlab.com/studienplan5/studienplan5
 
     Based on "cover" from Bootstrap
     (C) 2011-2016 Twitter, Inc.
@@ -50,7 +50,7 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li id="curr-home"><a href="#home">Startseite</a></li>
-                        <li id="curr-usage" ><a href="#usage">Nutzen</a></li>
+                        <li id="curr-usage" ><a href="#usage">Kalender</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hilfe <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -66,6 +66,7 @@
                         </li>
                         <li id="curr-contact"><a href="#contact">Kontakt</a></li>
                         <li id="curr-about"><a href="#about">Über</a></li>
+                        <li><div class="toolb navbar-text">Lade Klassen...</div> </li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -78,22 +79,28 @@
             </div>
 
 
-            <div class="inner cover" id="home">
-                <h1 class="cover-heading"></h1>
-                <p class="lead">Semesterplan für's Studium als Kalender.</p>
+            <div class="inner cover center" id="home">
+                <h1>Semesterplan für's Studium als Kalender</h1>
                 <p class="lead">
                 <a href="#usage" class="btn btn-lg btn-default">Gib' her!</a>
                 </p>
+                <p>Statt jedes mal mühsam deine Termine aus der <code>ABB_Gesamtplan_Moodle.xls</code>-Tabelle und deinem Ausbildungsplan rauszusuchen gibt's das hier ganz einfach in einem Kalender.</p>
+                <p>Den Kalender hier kannst du auch in deinen (persönlchen) Kalender aufnehmen, dazu mehr in der <a href="#help">Hilfe.</a>
+                <p>Deine Termine aus dem Semsterplan von der Moodle liegen schon vor, ich habe aber keinen Zugriff auf alle Ausbildungspläne, daher würde ich mich freuen wenn du mir den Ausbildungsplan deiner Klasse <a href="#contact">zukommenlassen könntest</a>.</p>
             </div>
 
             <div class="inner cover" id="usage">
-                <h1 class="cover-heading">Klasse</h1>
-                <p>
-                </p>
-                <div class="toolb form-inline">Laden...</div>
-                <div class="calendar">Lade Kalender...</div>
+                <div class="calendar">
+                    <p class="nojs text-warning bg-warning">
+                        Ohne JavaScript kannst du dir den Kalender leider nicht anschauen.
+                        Du kannst dir aber <a href="WS16">hier</a> alle .ics-Dateien ansehen. Wenn du deine Datei gefunden hast, kannst du sie aber trotzdem wie weiter unten bei <a href="#help">Verwendung</a> beschrieben verwenden :)
+                    </p>
+                    <div id="modal">
+                        <div><p>Lade Kalender...</p></div>
+                    </div>
+                </div>
                 <p>Alle .ics-Dateien kannst du <a href="WS16">hier</a> einsehen.</p> <!-- TODO: make WS16 dynamic -->
-                <p><a href="#help" target="_blank">Zur Hilfe, wie du die Kalenderdatei verwenden kannst.</a></p>
+                <p><a href="#help">Zur Hilfe, wie du die Kalenderdatei verwenden kannst.</a></p>
                 <div id="icals" style="display: none;">
                     <h2>ics-Datei</h2>
                     <ul class="list-unstyled" id="cal-links"></ul>
@@ -101,18 +108,19 @@
                 </div>
             </div>
 
-            <div class="inner cover" id="contact">
-                <h1 class="cover-heading">Kontakt</h1>
-                <p>Report a Bug:
+            <div class="inner cover center" id="contact">
+                <h1>Kontakt</h1>
+                <p class="lead">Report a Bug<br/>
                 <a href="https://github.com/joinout-de/studienplan5-web/issues/new" target="_blank">Website</a> |
                 <a href="https://github.com/joinout-de/studienplan5/issues/new" target="_blank">Calendar data</a>
                 </p>
-                <ul>
-                    <li id="mail">eMail: <a>ch (punkt) schulz (ädd) joinout (punkt) de</a></li>
-                    <li>Telegram: <a href="https://telegram.me/criztovyl" target="_blank">@criztovyl</a></li>
-                    <li>Twitter: <a href="https://twitter.com/criztovyl" target="_blank">@criztovyl</a></li>
-                    <li>GitHub: <a href="https://github.com/criztovyl" target="_blank">criztovyl</a></li>
-
+                <p class="lead">@criztovyl
+                <ul class="list-inline">
+                    <li id="mail"><a href="mailto:NOSPAMcriztovyl(ätt)joinout(dot)de" target="_blank"><span class="fa fa-envelope" aria-hidden="true"></span>&nbsp; Mail</a></li>
+                    <li><a href="https://t.me/criztovyl" target="_blank"><span class="fa fa-telegram" aria-hidden="true"></span>&nbsp; Telegram</a></li>
+                    <li><a href="https://twitter.com/criztovyl" target="_blank"><span class="fa fa-twitter" aria-hidden="true"></span>&nbsp; Twitter</a></li>
+                    <li><a href="https://gitlab.com/criztovyl" target="_blank"><span class="fa fa-gitlab" aria-hidden="true"></span>&nbsp; GitLab</a></li>
+                    <li><a href="https://github.com/criztovyl" target="_blank"><span class="fa fa-github" aria-hidden="true"></span>&nbsp; GitHub</a></li>
                 </ul>
             </div>
 
@@ -120,17 +128,40 @@
                 <div class="inner">
                     <p>Alle Angaben ohne Gewähr.</p>
                     <p>Report a Bug:
-                    <a href="https://github.com/joinout-de/studienplan5-web/issues/new" target="_blank">Website</a> |
-                    <a href="https://github.com/joinout-de/studienplan5/issues/new" target="_blank">Calendar data</a>
+                    <a href="https://gitlab.com/studienplan5/studienplan5-web/issues" target="_blank">Website</a> |
+                    <a href="https://gitlab.com/studienplan5/studienplan5/issues" target="_blank">Calendar data</a> <br/>
+                    (Benötigt einen <a href="https://gitlab.com/users/sign_in" target="_blank">kostenlosen GitLab.com Account</a>)
                     </p>
                     <hr/>
-                    <p>Website made with <a href="https://getbootstrap.com">Bootstrap</a> | Icons by <a href="http://glyphicons.com/">Glyphicons</a> |
-                    eMail Spam-protect by <a href="http://joemaller.com/js-mailer.shtml" target="_blank">Joe Maller</a>
+                    <p>
+                    <a href="https://fullcalendar.io/" target="_blank">FullCalendar</a><br/>
+                    <a href="https://getbootstrap.com" target="_blank">Bootstrap</a><br/>
+                    <a href="http://glyphicons.com/" target="_blank">Glyphicons</a> Halflings (included in Bootstrap).<br/>
+                    <a href="http://labs.rampinteractive.co.uk/touchSwipe" target="_blank">TouchSwipe</a><br/>
+                    eMail Spam-protect by <a href="http://joemaller.com/js-mailer.shtml" target="_blank">Joe Maller</a>.
                     <hr/>
-                    <p> &copy; 2016 Christoph "criztovyl" Schulz, relased under GPLv3 (calendar creator) and AGPL (the website)</p>
-                    <p>Source Code available at GitHub:
-                    <a href="https://github.com/joinout-de/studienplan5-web" target="_blank">Website</a> |
-                    <a href="https://github.com/joinout-de/studienplan5" target="_blank">Calendar creator</a></p>
+                    <p>Created by Christoph "criztovyl" Schulz.</p>
+                    <p>Source Code available at GitLab:
+                    <a href="https://gitlab.com/studienplan5/studienplan5-web" target="_blank">Website</a> |
+                    <a href="https://gitlab.com/studienplan5/studienplan5" target="_blank">Calendar creator</a></p>
+                    <hr/>
+                    <p>
+                    Website
+                    <a href="https://www.gnu.org/licenses/licenses.html#AGPL" target="_blank"><img height="50px" src="img/agpl.svg" /></a>
+                    &amp; Calendar creator
+                    <a href="https://www.gnu.org/licenses/licenses.html#GPL" target="_blank"><img height="50px" src="img/gpl.svg" /></a>
+                    </p>
+                    <hr/>
+                    <p>
+                    OS <a href="https://debian.org" target="_blank">Debian GNU/Linux</a> |
+                    Editor <a href="http://www.vim.org" target="_blank">vim</a> |
+                    Task Runner <a href="http://gulpjs.com" target="_blank">gulp</a> |
+                    SCM <a href="https://git-scm.com" target="_blank">git</a> |
+                    Hoster <a href="https://hetzner.de" target="_blank">Hetzner</a> &amp; <a href="https://uberspace.de" target="_blank">Uberspace</a> |
+                    Music <a href="https://bandcamp.com/fan/criztovyl" target="_blank">Bandcamp</a>, <a href="https://cmus.github.io/" target="_blank">cmus</a>
+                    </p>
+                    <hr/>
+                    <p>&lt;3 </p>
                 </div>
             </div>
 
@@ -147,12 +178,15 @@
                 </ol>
                 <h2>Semesterplan als Kalender abonnieren</h2>
                 <ol>
+                    <div class="help-wo-link">
                     <li>Auf der Startseite den "Gib' her!"-Button drücken</li>
                     <li>Im "Klasse"-Auswahlfeld deine Klasse auswählen</li>
                     <li>Dein Kalender wird jetzt angezeigt :)</li>
                     <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
                     <li>Rechtsklick auf "Kalender herunterladen"</li>
                     <li>Adresse kopieren / Ziel kopieren</li>
+                    </div>
+                    <div class="help-w-link"> </div>
                     <li>Oben unter "Hilfe" deine bevorzugte Anwendung raussuchen und dort fortsetzen.</li>
                 </ol>
             </div>
@@ -162,9 +196,12 @@
                 <p>Für Outlook kannst du einfach den "webcal öffen"-Link nutzen.</p>
                 <p>Sollte das nicht funktionieren:
                 <ul>
+                    <div class="help-wo-link">
                     <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
                     <li>Rechtsklick auf "Kalender herunterladen"</li>
                     <li>Adresse kopieren / Ziel kopieren</li>
+                    </div>
+                    <div class="help-w-link"> </div>
                     <li>Outlook und dann den Kalender öffnen</li>
                     <li>Kalender &rarr; Hinzufügen &rarr; Online/Internet</li>
                     <li>Hier die oben kopierte Adresse einfügen</li>
@@ -178,45 +215,50 @@
                 <h1 class="cover-heading">Google Calendar</h1>
                 <p>Bitte nutze folgende Schritte um den Kalender in deinen Google Kalender hinzuzufügen:
                 <ul>
+                    <div class="help-wo-link">
                     <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
                     <li>Rechtsklick auf "Kalender herunterladen"</li>
                     <li>Adresse kopieren / Ziel kopieren</li>
+                    </div>
+                    <div class="help-w-link"> </div>
                     <li>Google Calendar öffnen.</li>
                     <li>Auf das Dreieck nach unten bei "Andere Kalender" klicken und "Von URL hinzufügen" wählen.</li>
                     <li>Link von oben einfügen und "Hinzufügen" klicken.</li>
                     <li>Fertig.</li>
                 </ul>
                 <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
-                </p>
-                <p>Solltest du eine Möglichkeit gefunden haben das automatisch zu machen, <a href="https://github.com/criztovyl/studienplan5/issues/new" target="_blank">öffne bitte ein GitHub Issue</a> oder schreib mir eine <a href="#contact">Mail</a>.</p>
-                <p>
+                <p>Solltest du eine Möglichkeit gefunden haben das automatisch zu machen, <a href="https://gitlab.com/studienplan5/studienplan5/issues/" target="_blank">öffne bitte ein GitLab Issue</a> oder schreib mir eine <a href="#contact">Mail</a>.</p>
             </div>
 
             <div class="inner cover" id="thunderbird-lightning">
                 <h1 class="cover-heading">Thunderbird mit Lighning</h1>
                 <p>Bitte nutze folgende Schritte um den Kalender in dein Thunderbird hinzuzufügen:
                 <ul>
+                    <div class="help-wo-link">
                     <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
                     <li>Rechtsklick auf "Kalender herunterladen"</li>
                     <li>Adresse kopieren / Ziel kopieren</li>
+                    </div>
+                    <div class="help-w-link"> </div>
                     <li>Thunderbird und dann Kalender öffnen.</li>
                     <li>Rechtsklick auf die Kalenderlist und "Hinzufügen" wählen.</li>
                     <li>Link von oben einfügen und "Hinzufügen" klicken.</li>
                     <li>Fertig.</li>
                 </ul>
                 <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
-                </p>
-                <p>Solltest du eine Möglichkeit gefunden haben das automatisch zu machen, <a href="https://github.com/criztovyl/studienplan5/issues/new" target="_blank">öffne bitte ein GitHub Issue</a> oder schreib mir eine <a href="#contact">Mail</a>.</p>
-                <p>
+                <p>Solltest du eine Möglichkeit gefunden haben das automatisch zu machen, <a href="https://gitlab.com/studienplan5/studienplan5/issues/" target="_blank">öffne bitte ein GitLab Issue</a> oder schreib mir eine <a href="#contact">Mail</a>.</p>
             </div>
 
             <div class="inner cover" id="evolution">
                 <h1 class="cover-heading">Evolution</h1>
                 <p>Bitte nutze folgende Schritte um den Kalender in dein Evolution hinzuzufügen:
                 <ul>
+                    <div class="help-wo-link">
                     <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
                     <li>Rechtsklick auf "Kalender herunterladen"</li>
                     <li>Adresse kopieren / Ziel kopieren</li>
+                    </div>
+                    <div class="help-w-link"> </div>
                     <li>Oben links "Hinzufügen" und dann "Kalender" wählen.</li>
                     <li>Bei Typ "Web" auswählen.</li>
                     <li>Link von oben einfügen und "Hinzufügen" klicken.</li>
@@ -226,7 +268,6 @@
                     <li>Fertig.</li>
                 </ul>
                 <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
-                <p>
             </div>
 
             <div class="inner cover" id="wp">
@@ -235,9 +276,12 @@
                 <p class="small">Vorrausgesetzt du hast dein Windows Phone mit deiner Live ID verknüpft.</p>
                 <p>Bitte nutze folgende Schritte um ihn hinzuzufügen:
                 <ul>
+                    <div class="help-wo-link">
                     <li>Auf <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> klicken</li>
                     <li>Rechtsklick auf "Kalender herunterladen"</li>
                     <li>Adresse kopieren / Ziel kopieren</li>
+                    </div>
+                    <div class="help-w-link"> </div>
                     <li><a href="https://calendar.live.com" target="blank">calendar.live.com</a> aufrufen (öffnet in neuem Tab/Fenster) und ggf. anmelden.</li>
                     <li>Oben in der Leiste "Importieren" wählen</li>
                     <li>Links auf "Abbonieren" klicken.</li>
@@ -246,7 +290,6 @@
                     <li>Fertig. Der Kalender sollte jetzt in der Kalender-App angezeigt werden.</li>
                 </ul>
                 <p class="loc-warn">Je nach Spracheinstellungen können die jeweiligen Punkte anders beschriftet sein.</p>
-                <p>
             </div>
 
         </div>

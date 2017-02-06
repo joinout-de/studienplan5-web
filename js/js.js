@@ -280,6 +280,7 @@ function loadClasses(default_ical_dir){
                     logger.debug("Document ready");
 
                     select.html("");
+                    $("#modal > div").html("<p>Bitte Klasse auswählen.</p><p class=\"visible-xs\">Das Formular befindet sich im Menü.</p>");
                     $("<option>").html("Bitte auswählen...").attr("value", -1).appendTo(select);
 
                     $.each(keyys, function(index, element){
@@ -325,6 +326,8 @@ function loadClasses(default_ical_dir){
                     $(select).removeAttr("disabled");
                     $(select).on("change", classSelect);
 
+                    $('.toolb').html();
+                    $('.toolb').removeClass('navbar-text').addClass('navbar-form');
                     $('.toolb').html(select_template);
                     calendar.find('.fc-right').append(Templates.action_button());
 
@@ -359,13 +362,38 @@ $(document).ready(function(){
 
     $(".nojs").hide();
     $(".inner.cover").hide();
-    $(".inner.cover#home").show();
-    $(".nav li#curr-home").addClass("active");
+    //$(".inner.cover#home").show();
+    //$(".nav li#curr-home").addClass("active");
+
+    if(window.location.hash == "")
+        window.location.hash="home";
 
     calendar = $('.calendar');
-    calendar.html('');
     calendar.fullCalendar({
-        locale: 'de'
+        locale: 'de',
+        header: {
+            left:   'prev,today,next',
+            center: 'title',
+            right:  'month,listMonth'
+        },
+        eventClick: function(evt){
+            var title_nr = sprintf("%s%s", evt.title, evt.nr ? "#" + evt.nr : "");
+            var room_lect = sprintf(" (%s%s%s)", evt.room ? "Raum " + evt.room : "",  evt.room && evt.lect ? "; " : "", evt.lect ? evt.lect : "");
+            var str = sprintf("%s%s", title_nr, room_lect == " ()" ? "" : room_lect);
+            alert(str);
+        }
+    });
+
+    $("#modal > div").html("Lade Daten...");
+
+    $(".calendar").swipe( {
+        //Generic swipe handler for all directions
+        swipeLeft:function() {
+            calendar.fullCalendar("next");
+        },
+        swipeRight: function(){
+            calendar.fullCalendar("prev");
+        }
     });
 
     loadClasses();
@@ -383,7 +411,7 @@ $(document).ready(function(){
     var cloaked = 'join' + 'out' + '.com';
     cloaked = cloaked.replace(".com", ".de"); // Suuuper paranoid
     cloaked = ('cr' + 'iztovyl' + '@' + cloaked);
-    $("#contact #mail a").attr("href", "mailto:" + cloaked).html(cloaked);
+    $("#contact #mail a").attr("href", "mailto:" + cloaked);
 
 });
 
@@ -412,6 +440,7 @@ function hashChange(evt){
             if(target == '#usage')
                 $(document).ready(function(){
                     calendar.fullCalendar('render');
+                    $("#modal").addClass("modal-container");
                 });
 
             if(selection_match){
@@ -469,15 +498,33 @@ function classSelect(){
             });
         }
 
+        var href = classes[0][this.value].ical_file_href();
+
         $("#cal-links").show();
+        calendar.find('a#download').attr({"href": href, "target": "_blank"});
+        calendar.find('a#webcal').attr({"href": href, "target": "_blank"})[0].protocol = "webcal:";
+        calendar.find('.fc-right button').attr('title', '');
         calendar.find('.btn').removeClass("disabled");
-        calendar.find('a#download').attr({"href": classes[0][this.value].ical_file_href(), "target": "_blank"});
-        calendar.find('a#webcal').attr({"href": classes[0][this.value].ical_file_href(), "target": "_blank"})[0].protocol = "webcal:";
+
+        $(".help-wo-link").hide();
+        $(".help-w-link").html(Templates.help_copy_link({"link": location.href.replace(location.hash, '') + href}));
+        $("#modal").hide();
+
         setHashSelection(this.selectedIndex);
+
     }
     else{
         $("#cal-links").hide();
         calendar.find('.btn').addClass("disabled");
         calendar.fullCalendar('removeEventSources');
+        calendar.find('.fc-right button').attr('title', $('button', Templates.action_button()).attr('title'));
+
+        $(".help-wo-link").show();
+        $(".help-w-link").html();
+
+        removeHashSelection();
+
+        $("#modal").show();
+        $("#modal > div").html("<p>Bitte Klasse auswählen.</p><p>Das Formular befindet sich im Menü.</p>");
     }
 }
