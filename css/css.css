@@ -43,6 +43,7 @@ p.lead, #about > div > p, .inner.cover.center {
     z-index: 105;
 
     width: 30%;
+    min-width: 180px;
     margin: 10% auto;
     text-align: center;
 
